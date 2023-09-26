@@ -13,24 +13,28 @@ import (
 )
 
 type Chart struct {
-	Title    string
-	XLabel   string
-	YLabel   string
-	X        []string
-	Y        []float64
-	YHalf    []float64
-	YProject []float64
+	Title         string
+	XLabel        string
+	YLabel        string
+	X             []string
+	Y             []float64
+	YHalf         []float64
+	YProject      []float64
+	YProjectLower []float64
+	YProjectUpper []float64
 }
 
 func New(title string, d []byte) (*Chart, error) {
 	c := &Chart{
-		Title:    title,
-		XLabel:   "",
-		YLabel:   "",
-		X:        []string{},
-		Y:        []float64{},
-		YHalf:    []float64{},
-		YProject: []float64{},
+		Title:         title,
+		XLabel:        "",
+		YLabel:        "",
+		X:             []string{},
+		Y:             []float64{},
+		YHalf:         []float64{},
+		YProject:      []float64{},
+		YProjectLower: []float64{},
+		YProjectUpper: []float64{},
 	}
 
 	r := csv.NewReader(strings.NewReader(string(d)))
@@ -71,6 +75,8 @@ func New(title string, d []byte) (*Chart, error) {
 	var forecasts []float64
 
 	c.YProject = c.YHalf
+	c.YProjectUpper = c.YHalf
+	c.YProjectLower = c.YHalf
 	forecastOnce := 5
 	for f := 0; f < yLen/2; f += forecastOnce {
 
@@ -81,6 +87,17 @@ func New(title string, d []byte) (*Chart, error) {
 
 		c.YProject = append(c.YProject, forecasts...)
 
+		forecasts, err = a.ForecastLower(c.Y[0:yLen/2+f], forecastOnce)
+		if err != nil {
+			return nil, err
+		}
+		c.YProjectLower = append(c.YProjectLower, forecasts...)
+
+		forecasts, err = a.ForecastUpper(c.Y[0:yLen/2+f], forecastOnce)
+		if err != nil {
+			return nil, err
+		}
+		c.YProjectUpper = append(c.YProjectUpper, forecasts...)
 	}
 
 	return c, nil

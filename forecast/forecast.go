@@ -29,3 +29,13 @@ func (a *Arima) Forecast(data []float64, futureVals int) ([]float64, error) {
 	result := arima.ForeCastARIMA(data, futureVals, a.config)
 	return result.GetForecast(), nil
 }
+
+func (a *Arima) ForecastUpper(data []float64, futureVals int) ([]float64, error) {
+	result := arima.ForeCastARIMA(data, futureVals, a.config)
+	return result.GetForecastUpperConf(), nil
+}
+
+func (a *Arima) ForecastLower(data []float64, futureVals int) ([]float64, error) {
+	result := arima.ForeCastARIMA(data, futureVals, a.config)
+	return result.GetForecastLowerConf(), nil
+}

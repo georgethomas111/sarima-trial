@@ -49,6 +49,26 @@ const loadLineChart = function(i) {
 	  {{end}}
         ],
       },
+      {
+        label: '{{.Title}}-projected-upper',
+        backgroundColor: 'rgb(230, 140, 99)',
+        borderColor: 'rgb(95, 168, 9)',
+        data: [
+          {{range .YProjectUpper}}
+	  {{.}},
+	  {{end}}
+        ],
+      },
+      {
+        label: '{{.Title}}-projected-lower',
+        backgroundColor: 'rgb(9, 9, 9)',
+        borderColor: 'rgb(9, 9, 9)',
+        data: [
+          {{range .YProjectLower}}
+	  {{.}},
+	  {{end}}
+        ],
+      },
     ]
   }
 
@@ -108,8 +128,8 @@ const loadBarChart = function() {
       article {
         padding: 10px;
         margin: 10px;
-        width: 40%;
-        height: 20%;
+        width: 80%;
+        height: 80%;
       }
 
       /* Add your flexbox CSS below here */
