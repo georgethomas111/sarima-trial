@@ -28,18 +28,28 @@ const loadLineChart = function(i) {
 
   const data = {
     labels: labels,
-    datasets: [{
-      label: '{{.Title}}',
-      backgroundColor: 'rgb(204, 255, 153)',
-      borderColor: 'rgb(204, 255, 153)',
-      xAxisID: '{{.XLabel}}',
-      yAxisID: '{{.YLabel}}',
-      data: [
-        {{range .Y}}
-	{{.}},
-	{{end}}
-      ],
-    }]
+    datasets: [
+      {
+        label: '{{.Title}}',
+        backgroundColor: 'rgb(204, 255, 153)',
+        borderColor: 'rgb(204, 255, 153)',
+        data: [
+          {{range .Y}}
+	  {{.}},
+	  {{end}}
+        ],
+      },
+      {
+        label: '{{.Title}}-projected',
+        backgroundColor: 'rgb(40, 88, 99)',
+        borderColor: 'rgb(150, 255, 153)',
+        data: [
+          {{range .YProject}}
+	  {{.}},
+	  {{end}}
+        ],
+      },
+    ]
   }
 
   const config = {

@@ -8,23 +8,29 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	arima "github.com/georgethomas111/sarima-trial/forecast"
 )
 
 type Chart struct {
-	Title  string
-	XLabel string
-	YLabel string
-	X      []string
-	Y      []float64
+	Title    string
+	XLabel   string
+	YLabel   string
+	X        []string
+	Y        []float64
+	YHalf    []float64
+	YProject []float64
 }
 
 func New(title string, d []byte) (*Chart, error) {
 	c := &Chart{
-		Title:  title,
-		XLabel: "",
-		YLabel: "",
-		X:      []string{},
-		Y:      []float64{},
+		Title:    title,
+		XLabel:   "",
+		YLabel:   "",
+		X:        []string{},
+		Y:        []float64{},
+		YHalf:    []float64{},
+		YProject: []float64{},
 	}
 
 	r := csv.NewReader(strings.NewReader(string(d)))
@@ -53,6 +59,22 @@ func New(title string, d []byte) (*Chart, error) {
 		c.Y = append(c.Y, yFloat)
 	}
 
+	yLen := len(c.Y)
+	c.YHalf = make([]float64, yLen/2)
+	copy(c.YHalf, c.Y)
+
+	a, err := arima.Train(c.YHalf)
+	if err != nil {
+		return nil, err
+	}
+
+	var forecasts []float64
+	forecasts, err = a.Forecast(c.YHalf, yLen/2)
+	if err != nil {
+		return nil, err
+	}
+
+	c.YProject = append(c.YHalf, forecasts...)
 	return c, nil
 }
 
