@@ -1,0 +1,246 @@
+
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+window.addEventListener('load', (event) => {
+  loadCharts()
+});
+
+const loadCharts = function() {
+  loadLineChart(0)
+}
+
+const loadLineChart = function(i) {
+  const labels = [
+    
+    "27 AUG",
+    
+    "28 AUG",
+    
+    "29 AUG",
+    
+    "30 AUG",
+    
+    "31 AUG",
+    
+    "1 SEP",
+    
+    "2 SEP",
+    
+    "3 SEP",
+    
+    "4 SEP",
+    
+    "5 SEP",
+    
+    "6 SEP",
+    
+    "7 SEP",
+    
+    "8 SEP",
+    
+    "9 SEP",
+    
+    "10 SEP",
+    
+    "11 SEP",
+    
+    "12 SEP",
+    
+    "13 SEP",
+    
+    "14 SEP",
+    
+    "15 SEP",
+    
+    "16 SEP",
+    
+    "17 SEP",
+    
+    "18 SEP",
+    
+    "19 SEP",
+    
+    "20 SEP",
+    
+    "21 SEP",
+    
+    "22 SEP",
+    
+    "23 SEP",
+    
+    "24 SEP",
+    
+    "25 SEP",
+    
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'unique_visitors',
+      backgroundColor: 'rgb(204, 255, 153)',
+      borderColor: 'rgb(204, 255, 153)',
+      xAxisID: 'timestamp',
+      yAxisID: 'value',
+      data: [
+        
+	 2 ,
+	
+	 6 ,
+	
+	 12 ,
+	
+	 5 ,
+	
+	 7 ,
+	
+	 12 ,
+	
+	 10 ,
+	
+	 2 ,
+	
+	 9 ,
+	
+	 9 ,
+	
+	 9 ,
+	
+	 14 ,
+	
+	 11 ,
+	
+	 4 ,
+	
+	 2 ,
+	
+	 3 ,
+	
+	 6 ,
+	
+	 8 ,
+	
+	 1 ,
+	
+	 7 ,
+	
+	 2 ,
+	
+	 7 ,
+	
+	 2 ,
+	
+	 9 ,
+	
+	 6 ,
+	
+	 3 ,
+	
+	 15 ,
+	
+	 8 ,
+	
+	 5 ,
+	
+	 4 ,
+	
+      ],
+    }]
+  }
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+
+  let elementId = "lineChart" + i.toString()
+  console.log("elementId is", elementId) 
+
+  const myChart = new Chart(document.getElementById(elementId), config)
+}
+
+const loadBarChart = function() {
+  const ctx = document.getElementById('barChart').getContext('2d');
+
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 1
+        }]
+    },
+    options: {}
+  });
+}
+</script>
+      
+<style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      header {
+        background: purple;
+        height: 100px;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        line-height: 100px;
+        margin: 0;
+      }
+
+      article {
+        padding: 10px;
+        margin: 10px;
+        width: 40%;
+        height: 20%;
+      }
+
+       
+
+      section {
+        display: flex;
+	flex-direction: row;
+        flex-wrap: wrap
+      }
+
+      
+</style>
+
+</head>
+
+<body>
+    <section>
+
+      <article>
+        <h2>Test line chart1</h2>
+
+	<canvas id="lineChart0"></canvas>
+      </article>
+
+      <article>
+        <h2>End of sample charts</h2>
+    </section>
+	<h1> Is there a chart below this </h1>
+</body>
+</html>
