@@ -69,12 +69,20 @@ func New(title string, d []byte) (*Chart, error) {
 	}
 
 	var forecasts []float64
-	forecasts, err = a.Forecast(c.YHalf, yLen/2)
-	if err != nil {
-		return nil, err
+
+	c.YProject = c.YHalf
+	forecastOnce := 5
+	for f := 0; f < yLen/2; f += forecastOnce {
+
+		forecasts, err = a.Forecast(c.Y[0:yLen/2+f], forecastOnce)
+		if err != nil {
+			return nil, err
+		}
+
+		c.YProject = append(c.YProject, forecasts...)
+
 	}
 
-	c.YProject = append(c.YHalf, forecasts...)
 	return c, nil
 }
 
