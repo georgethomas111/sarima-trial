@@ -77,7 +77,7 @@ func New(title string, d []byte) (*Chart, error) {
 	c.YProject = c.YHalf
 	c.YProjectUpper = c.YHalf
 	c.YProjectLower = c.YHalf
-	forecastOnce := 5
+	forecastOnce := 10
 	for f := 0; f < yLen/2; f += forecastOnce {
 
 		forecasts, err = a.Forecast(c.Y[0:yLen/2+f], forecastOnce)

@@ -59,6 +59,7 @@ const loadLineChart = function(i) {
 	  {{end}}
         ],
       },
+      /*
       {
         label: '{{.Title}}-projected-lower',
         backgroundColor: 'rgb(9, 9, 9)',
@@ -69,6 +70,7 @@ const loadLineChart = function(i) {
 	  {{end}}
         ],
       },
+      */
     ]
   }
 

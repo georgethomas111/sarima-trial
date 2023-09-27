@@ -6,13 +6,13 @@ import (
 
 func Train(data []float64) (*Arima, error) {
 	// Not sure what p is yet
-	p := 4
-	d := 1
-	q := 2
-	P := 1
+	p := 1
+	d := 0
+	q := 0
+	P := 0
 	D := 1
-	Q := 0
-	m := 0
+	Q := 1
+	m := 5
 
 	c := arima.NewConfig(p, d, q, P, D, Q, m)
 
